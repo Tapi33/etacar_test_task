@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {Header} from "./components/Header";
-import {MainPage} from "./pages/MainPage";
+import {CurrencyInfo} from "./pages/CurrencyInfo";
 
 export const App:FC = () => {
     return (
         <>
             <Header />
-            <MainPage/>
+            <CurrencyInfo/>
         </>
     );
 };
