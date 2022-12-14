@@ -3,26 +3,35 @@ import React from 'react';
 import {CurrencyItemContent} from "../../styles/currencyItem";
 import {CurrencyListInfoItem} from "../../styles/currencyList";
 
-export const CurrencyItem = () => {
+interface ICurrencyItemProps{
+    id: string;
+    rank: number;
+    symbol: string;
+    name: string;
+    supply: string;
+    priceUsd: string;
+}
+
+export const CurrencyItem: React.FC<ICurrencyItemProps> = ({ name, rank, supply, priceUsd, symbol}) => {
     return (
         <CurrencyItemContent>
             <CurrencyListInfoItem>
-                BTc
+                {rank}
             </CurrencyListInfoItem>
             <CurrencyListInfoItem>
-                Bitcoin
+                {symbol}
             </CurrencyListInfoItem>
             <CurrencyListInfoItem>
-                12312
+                {name}
             </CurrencyListInfoItem>
             <CurrencyListInfoItem>
-                1020323
+                {priceUsd}
             </CurrencyListInfoItem>
             <CurrencyListInfoItem>
-                321312
+                {supply}
             </CurrencyListInfoItem>
             <CurrencyListInfoItem>
-                "f;'ds
+                {priceUsd}
             </CurrencyListInfoItem>
         </CurrencyItemContent>
     );
