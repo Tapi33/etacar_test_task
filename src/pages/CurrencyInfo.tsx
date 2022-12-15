@@ -7,8 +7,17 @@ import {
     CurrencyWrapper,
     CurrencyContendInfo
 } from "../styles/currencyInfo";
+import {useAppSelecrot} from "../hooks/hooks";
+import {useNavigate, useParams} from "react-router";
 
 export const CurrencyInfo:FC = () => {
+    const navigate = useNavigate()
+    const {currencies} = useAppSelecrot(state => state.currency)
+    const {id} = useParams()
+    const selectCurrency = currencies.find((currency)=>currency.id == id)
+
+    const handlerBack = () => navigate('/main')
+
     return (
         <CurrencyPage>
             <CurrencyWrapper>
@@ -17,13 +26,13 @@ export const CurrencyInfo:FC = () => {
                         <CurrencyContentBtn>
                             Добавить
                         </CurrencyContentBtn>
-                        <CurrencyContentBtn>
+                        <CurrencyContentBtn onClick={()=> handlerBack()}>
                             Назад
                         </CurrencyContentBtn>
                     </CurrencyContentItem>
                     <CurrencyContendInfo>
                         <CurrencyContentItem>
-                            Name: Bitcoin
+                            Name: {selectCurrency?.name}
                         </CurrencyContentItem>
                         <CurrencyContentItem>
                             Symbol: Bitcoin

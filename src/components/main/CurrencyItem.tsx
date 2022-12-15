@@ -2,8 +2,10 @@ import React from 'react';
 
 import {CurrencyItemContent} from "../../styles/currencyItem";
 import {CurrencyListInfoItem} from "../../styles/currencyList";
+import {useNavigate} from "react-router";
 
-interface ICurrencyItemProps{
+
+interface ICurrencyItemProps {
     id: string;
     rank: number;
     symbol: string;
@@ -12,9 +14,15 @@ interface ICurrencyItemProps{
     priceUsd: string;
 }
 
-export const CurrencyItem: React.FC<ICurrencyItemProps> = ({ name, rank, supply, priceUsd, symbol}) => {
+export const CurrencyItem: React.FC<ICurrencyItemProps> = ({id,name, rank, supply, priceUsd, symbol}) => {
+
+    const navigate = useNavigate()
+    const selectNavigateToCurrency = (id:string) =>{
+        navigate(`/currency/${id}`)
+    }
+
     return (
-        <CurrencyItemContent>
+        <CurrencyItemContent onClick={()=> selectNavigateToCurrency(id)}>
             <CurrencyListInfoItem>
                 {rank}
             </CurrencyListInfoItem>

@@ -10,9 +10,12 @@ export const CurrencyList = () => {
     const dispatch = useAppDispatch()
     const currencies = useAppSelecrot(state => state.currency.currencies)
 
+
+
     useEffect(()=>{
         dispatch(getCurrency())
     },[])
+
 
     return (
         <CurrencyListContent>
