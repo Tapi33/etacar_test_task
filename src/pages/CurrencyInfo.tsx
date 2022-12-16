@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {
     CurrencyPage,
     CurrencyContent,
@@ -7,16 +7,24 @@ import {
     CurrencyWrapper,
     CurrencyContendInfo
 } from "../styles/currencyInfo";
-import {useAppSelecrot} from "../hooks/hooks";
+import {useAppDispatch, useAppSelecrot} from "../hooks/hooks";
 import {useNavigate, useParams} from "react-router";
+import {LineChart} from "../components/lineChart";
+import {getCurrencyHistory} from "../redux/slices/currencyHistorySlice";
 
 export const CurrencyInfo:FC = () => {
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const {currencies} = useAppSelecrot(state => state.currency)
+    const {currencyHistory} = useAppSelecrot(state => state.currencyHistory)
     const {id} = useParams()
     const selectCurrency = currencies.find((currency)=>currency.id == id)
 
     const handlerBack = () => navigate('/main')
+
+    useEffect(()=>{
+        dispatch(getCurrencyHistory(id))
+    },[])
 
     return (
         <CurrencyPage>
@@ -35,14 +43,14 @@ export const CurrencyInfo:FC = () => {
                             Name: {selectCurrency?.name}
                         </CurrencyContentItem>
                         <CurrencyContentItem>
-                            Symbol: Bitcoin
+                            Symbol: {selectCurrency?.symbol}
                         </CurrencyContentItem>
                         <CurrencyContentItem className={"currency-price"}>
-                            Price: 20323$
+                            Price: {Number(selectCurrency?.priceUsd).toFixed(3)}$
                         </CurrencyContentItem>
                     </CurrencyContendInfo>
                     <CurrencyContentItem>
-                        //График
+                        <LineChart history={currencyHistory} />
                     </CurrencyContentItem>
                 </CurrencyContent>
             </CurrencyWrapper>
