@@ -9,7 +9,7 @@ export const App:FC = () => {
         <>
             <Header />
             <Routes>
-                <Route path='/main' element={<CurrencyList />} />
+                <Route path='/' element={<CurrencyList />} />
                 <Route path='/currency/:id' element={<CurrencyInfo />} />
             </Routes>
         </>
